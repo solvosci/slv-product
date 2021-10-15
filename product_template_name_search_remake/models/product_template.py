@@ -9,6 +9,8 @@ class ProductTemplate(models.Model):
 
     @api.model
     def _name_search(self, name, args, operator="ilike", limit=None, name_get_uid=None):
+        if len(name) < 5:
+            return []
         product_ids = list(
             self.env["product.template"]._search(
             ['|', '|', '|',
@@ -16,7 +18,7 @@ class ProductTemplate(models.Model):
             ('product_variant_ids.default_code', operator, name),
             ('name', operator, name),
             ('barcode', operator, name)] + args,
-            limit=None,
+            limit=limit,
             access_rights_uid=name_get_uid,
         ))
         return product_ids
