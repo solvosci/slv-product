@@ -1,0 +1,1 @@
+Adds change to the original name_get method of product.template due to an error loading a large number of products 
