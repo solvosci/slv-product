@@ -29,7 +29,8 @@ class ProductPricelistItem(models.Model):
                     else:
                         raise ValidationError(_("Cannot add more than one pricelist item for the same product at the same time!"))
 
-        for values in vals_list:
+        vals_list_old = vals_list.copy()
+        for values in vals_list_old:
             if values.get('date_start'):
                 for item in self.pricelist_id.item_ids.search([('pricelist_id', '=', values['pricelist_id']), ('product_tmpl_id', '=', values['product_tmpl_id'])], order='date_start asc'):
                     date_min = self.pricelist_id.item_ids.search([('pricelist_id', '=', values['pricelist_id']), ('product_tmpl_id', '=', values['product_tmpl_id'])], order='date_start asc')[0].date_start
@@ -39,9 +40,9 @@ class ProductPricelistItem(models.Model):
                     if date_min > date_start:
                         values['date_end'] = date_min - timedelta(days=1)
                         break
-                    # TODO When you enter a date_start with the same date_start as another, overwrite it
                     elif item.date_start == date_start:
-                        values['date_end'] = item.date_end
+                        item.fixed_price = values['fixed_price']
+                        vals_list.remove(values)
                         break
                     # New date is greater than the date_start and date_end is False
                     elif item.date_start < date_start and item.date_end is False:
