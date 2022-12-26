@@ -1,0 +1,80 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_secondary_unit_semidependent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-07 07:52+0000\n"
+"PO-Revision-Date: 2022-11-07 08:55+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit__dependency_type
+msgid "Dependency Type"
+msgstr "Tipo de dependencia"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields.selection,name:product_secondary_unit_semidependent.selection__product_secondary_unit__dependency_type__dependent
+msgid "Dependent"
+msgstr "Dependiente"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit__display_name
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit_mixin__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit__id
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit_mixin__id
+msgid "ID"
+msgstr ""
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields,help:product_secondary_unit_semidependent.field_product_secondary_unit__dependency_type
+msgid ""
+"If dependency type is 'dependent' the factor is used to compute quantity in "
+"primary unit,otherwise primary and secondary unit are independent. For "
+"example if you sell serviceby package (1 unit for example) and you want to "
+"put the real time (ex : 4 hours) to allows employee scheduling"
+msgstr ""
+"Si el tipo de dependencia es 'dependiente', el factor se usa para calcular "
+"la cantidad en la unidad primaria; de lo contrario, la unidad primaria y la "
+"secundaria son independientes. Por ejemplo, si vende el servicio por "
+"paquete (1 unidad, por ejemplo) y desea poner el tiempo real (por ejemplo: "
+"4 horas) para permitir la programación de empleados"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields.selection,name:product_secondary_unit_semidependent.selection__product_secondary_unit__dependency_type__independent
+msgid "Independent"
+msgstr "Independiente"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit____last_update
+#: model:ir.model.fields,field_description:product_secondary_unit_semidependent.field_product_secondary_unit_mixin____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model,name:product_secondary_unit_semidependent.model_product_secondary_unit
+msgid "Product Secondary Unit"
+msgstr "Unidad secundaria de producto"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model,name:product_secondary_unit_semidependent.model_product_secondary_unit_mixin
+msgid "Product Secondary Unit Mixin"
+msgstr "Unidad secundaria de producto"
+
+#. module: product_secondary_unit_semidependent
+#: model:ir.model.fields.selection,name:product_secondary_unit_semidependent.selection__product_secondary_unit__dependency_type__semidependent
+msgid "Semidependent"
+msgstr "Semidependiente"
