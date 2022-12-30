@@ -9,11 +9,9 @@ class ProductSecondaryUnit(models.Model):
     _description = "Product Secondary Unit"
 
     dependency_type = fields.Selection(
-        selection=[
-            ("dependent", "Dependent"),
+        selection_add=[
             ("semidependent", "Semidependent"),
-            ("independent", "Independent"),
-        ],
+        ]
     )
 
     def name_get(self):
