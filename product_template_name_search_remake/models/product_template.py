@@ -11,13 +11,16 @@ class ProductTemplate(models.Model):
     def _name_search(self, name, args, operator="ilike", limit=None, name_get_uid=None):
         if len(name) < 5:
             return []
+        extra_domain = self.env.context.get("product_template_extra_domain", False)
+        if not extra_domain:
+            extra_domain = ('1', '!=', '1')
         product_ids = list(
             self.env["product.template"]._search(
-            ['|', '|', '|',
+            ['|', '|', '|', '|',
             ("default_code", operator, name),
             ('product_variant_ids.default_code', operator, name),
             ('name', operator, name),
-            ('barcode', operator, name)] + args,
+            ('barcode', operator, name), extra_domain] + args,
             limit=limit,
             access_rights_uid=name_get_uid,
         ))
