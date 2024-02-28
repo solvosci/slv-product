@@ -11,6 +11,7 @@ class WebsiteSale(WebsiteSale):
 
     def _get_search_domain(self, search, category, attrib_values):
         domain = super(WebsiteSale, self)._get_search_domain(search, category, attrib_values)
-        domain = WebsiteSaleSearch._add_search_domain(domain, search, 'partner_ref')
-        domain = WebsiteSaleSearch._add_search_domain(domain, search, 'barcode')
+        if search:
+            domain = WebsiteSaleSearch._add_search_domain(domain, search, 'partner_ref')
+            domain = WebsiteSaleSearch._add_search_domain(domain, search, 'barcode')
         return domain
