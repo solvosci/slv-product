@@ -32,8 +32,9 @@ class ProductPricelistItem(models.Model):
         vals_list_old = vals_list.copy()
         for values in vals_list_old:
             if values.get('date_start'):
-                for item in self.pricelist_id.item_ids.search([('pricelist_id', '=', values['pricelist_id']), ('product_tmpl_id', '=', values['product_tmpl_id'])], order='date_start asc'):
-                    date_min = self.pricelist_id.item_ids.search([('pricelist_id', '=', values['pricelist_id']), ('product_tmpl_id', '=', values['product_tmpl_id'])], order='date_start asc')[0].date_start
+                pricelist_item_ids = self.search([('pricelist_id', '=', values['pricelist_id']), ('product_tmpl_id', '=', values['product_tmpl_id'])], order='date_start asc')
+                date_min = pricelist_item_ids and pricelist_item_ids[0].date_start
+                for item in pricelist_item_ids:
                     date_start = datetime.strptime(values['date_start'], '%Y-%m-%d').date()
 
                     # New date is manor to the smallest date
