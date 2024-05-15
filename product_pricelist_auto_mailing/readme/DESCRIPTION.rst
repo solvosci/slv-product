@@ -1,0 +1,1 @@
+Adds automatic notification when certain users modify a pricelist.

@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+        <record id="cron" model="ir.cron">
+            <field name="name">Send notifications of changed or created pricelist items</field>
+            <field name="active" eval="False" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_product_pricelist" />
+            <field name="code">model.send_notification()</field>
+        </record>
+    </data>
+</odoo>
