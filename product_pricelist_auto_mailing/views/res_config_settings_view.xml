@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings (product_pricelist_auto_mailing)</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='multi_company']" position="before">
+                <div id="pricelist_changes">
+                    <h2>Pricelist notifications</h2>
+                    <div class="row mt16 o_settings_container" name="pricelist_changes">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="user_notified_for_price_changes_ids"/>
+                                <div class="text-muted">
+                                    <span>Users who will receive notice of pricelist changed by users so marked</span>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="user_notified_for_price_changes_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="user_notifying_price_changes_ids"/>
+                                <div class="text-muted">
+                                    <span>Users to take into account when changing the content of a pricelist</span>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="user_notifying_price_changes_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
