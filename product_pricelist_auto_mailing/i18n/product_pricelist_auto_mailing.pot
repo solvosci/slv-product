@@ -1,0 +1,106 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_pricelist_auto_mailing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-27 07:52+0000\n"
+"PO-Revision-Date: 2024-06-27 07:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_pricelist_auto_mailing
+#: model:mail.template,body_html:product_pricelist_auto_mailing.mail_template_data_pricelist_notification
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        % for body in ctx.get('body', []):\n"
+"                            ${body}<br/>\n"
+"                        % endfor\n"
+"                        <br/>\n"
+"                        Please review. <br/>\n"
+"                        Thanks.\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
+msgid ""
+"<span>Users to take into account when changing the content of a "
+"pricelist</span>"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
+msgid ""
+"<span>Users who will receive notice of pricelist changed by users so "
+"marked</span>"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model,name:product_pricelist_auto_mailing.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model,name:product_pricelist_auto_mailing.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__mailable_user_ids
+msgid "Mailable User"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model,name:product_pricelist_auto_mailing.model_product_pricelist
+msgid "Pricelist"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model,name:product_pricelist_auto_mailing.model_product_pricelist_item
+msgid "Pricelist Rule"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:mail.template,subject:product_pricelist_auto_mailing.mail_template_data_pricelist_notification
+msgid "Pricelist modified"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
+msgid "Pricelist notifications"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.actions.server,name:product_pricelist_auto_mailing.cron_ir_actions_server
+#: model:ir.cron,cron_name:product_pricelist_auto_mailing.cron
+#: model:ir.cron,name:product_pricelist_auto_mailing.cron
+msgid "Send notifications of changed or created pricelist items"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: code:addons/product_pricelist_auto_mailing/models/product_pricelist.py:0
+#, python-format
+msgid "The pricelist %s, has changed for users: %s"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_res_company__user_notified_for_price_changes_ids
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_res_config_settings__user_notified_for_price_changes_ids
+msgid "User Notified For Price Changes"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_res_company__user_notifying_price_changes_ids
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_res_config_settings__user_notifying_price_changes_ids
+msgid "User Notifying Price Changes"
+msgstr ""
