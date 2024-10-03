@@ -11,6 +11,8 @@ class ProductPricelistItem(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        if self.env.context.get("skip_auto_update_date", True):
+            return super().create(vals_list)
 
         # Refactor code ...
         # Adding elements from the form: In the case that more than one
