@@ -1,0 +1,1 @@
+Make visible price_discounted in in supplier pricelist.
