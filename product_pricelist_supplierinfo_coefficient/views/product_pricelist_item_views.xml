@@ -7,7 +7,19 @@
         <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='base']" position="after">
-                <field name="coefficient"/>
+                <field name="coefficient" invisible="base != 'supplierinfo'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_pricelist_item_tree_view_inherit" model="ir.ui.view">
+        <field name="name">product.pricelist.item.tree.inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price']" position="before">
+                <field name="base" column_invisible="1"/>
+                <field name="coefficient" invisible="base != 'supplierinfo'"/>
             </xpath>
         </field>
     </record>

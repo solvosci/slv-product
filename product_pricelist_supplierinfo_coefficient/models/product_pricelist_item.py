@@ -3,6 +3,7 @@
 
 from odoo import fields, models
 
+from datetime import datetime
 
 class ProductPricelistItem(models.Model):
     _inherit = "product.pricelist.item"
@@ -12,18 +13,21 @@ class ProductPricelistItem(models.Model):
     def _compute_price(self, product, quantity, uom, date, currency):
         result = super()._compute_price(product, quantity, uom, date, currency=currency)
 
-        # Price without discount
-        price_without_discount = product.sudo()._get_supplierinfo_pricelist_price(
-            self,
-            date=date or self.env.context.get("date"),
-            quantity=quantity,
-        )
+        if isinstance(date, datetime):
+            date = date.date()
 
         discount = 0.0
         seller = None 
 
         # Price according to the formula
         if self.compute_price == "formula" and self.base == "supplierinfo":
+
+            # Price without discount
+            price_without_discount = product.sudo()._get_supplierinfo_pricelist_price(
+                self,
+                date=date or self.env.context.get("date"),
+                quantity=quantity,
+            )
             seller = product.sudo()._select_seller(
                 partner_id=self.env.context.get("force_filter_supplier_id"),
                 quantity=quantity,
@@ -54,10 +58,10 @@ class ProductPricelistItem(models.Model):
                         result = price_without_discount
             else:
                 # If there isnt  seller, return price without discount
-                result = price_without_discount
+                result = result
         else:
             # If compute_price isnt "formula", return price without discount default
-            result = price_without_discount
+            result = result
 
         return result
 
