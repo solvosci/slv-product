@@ -1,7 +1,7 @@
 # © 2024 Solvos Consultoría Informática (<http://www.solvos.es>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 from datetime import datetime
 
@@ -9,6 +9,7 @@ class ProductPricelistItem(models.Model):
     _inherit = "product.pricelist.item"
 
     coefficient = fields.Float(string='Coefficient', default=0.0)
+    show_coefficient = fields.Boolean("Show Coefficient", default=False)
 
     def _compute_price(self, product, quantity, uom, date, currency):
         result = super()._compute_price(product, quantity, uom, date, currency=currency)
@@ -65,3 +66,17 @@ class ProductPricelistItem(models.Model):
 
         return result
 
+
+    @api.onchange('base_pricelist_id', 'applied_on', 'categ_id')
+    def onchange_base_pricelist_id(self):
+        self.coefficient = 0.0
+        self.price_discount = 0.0
+        self.show_coefficient = False 
+
+        if self.base == 'pricelist' and self.base_pricelist_id:
+            if self.applied_on == '2_product_category':
+                pricelist_items = self.base_pricelist_id.item_ids.filtered(lambda x: x.categ_id == self.categ_id)
+                if pricelist_items:
+                    self.coefficient = pricelist_items[0].coefficient
+                    self.price_discount = pricelist_items[0].price_discount
+                    self.show_coefficient = True
