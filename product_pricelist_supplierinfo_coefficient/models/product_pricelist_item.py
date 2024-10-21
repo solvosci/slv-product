@@ -10,6 +10,15 @@ class ProductPricelistItem(models.Model):
 
     coefficient = fields.Float(string='Coefficient', default=0.0)
     show_coefficient = fields.Boolean("Show Coefficient", default=False)
+    price_discount_supplierinfo = fields.Float(string='Supplier Discount', default=0.0)
+    base_from_pricelist = fields.Selection(
+        selection=[
+            ('list_price', 'Sales Price'),
+            ('standard_price', 'Cost'),
+            ('pricelist', 'Other Pricelist'),
+            ("supplierinfo", "Prices based on supplier info"),
+        ],
+    )
 
     def _compute_price(self, product, quantity, uom, date, currency):
         result = super()._compute_price(product, quantity, uom, date, currency=currency)
@@ -78,5 +87,6 @@ class ProductPricelistItem(models.Model):
                 pricelist_items = self.base_pricelist_id.item_ids.filtered(lambda x: x.categ_id == self.categ_id)
                 if pricelist_items:
                     self.coefficient = pricelist_items[0].coefficient
-                    self.price_discount = pricelist_items[0].price_discount
+                    self.price_discount_supplierinfo = pricelist_items[0].price_discount
                     self.show_coefficient = True
+                    self.base_from_pricelist = pricelist_items[0].base

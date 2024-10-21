@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-14 07:20+0000\n"
-"PO-Revision-Date: 2024-10-14 09:22+0200\n"
+"POT-Creation-Date: 2024-10-22 06:55+0000\n"
+"PO-Revision-Date: 2024-10-22 08:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,11 +18,66 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_coefficient.field_product_pricelist_item__base_from_pricelist
+msgid "Base From Pricelist"
+msgstr "Basado en"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_coefficient.product_pricelist_item_form_view_inherit
+msgid "Base on:"
+msgstr "Basado en:"
+
+#. module: product_pricelist_supplierinfo_coefficient
 #: model:ir.model.fields,field_description:product_pricelist_supplierinfo_coefficient.field_product_pricelist_item__coefficient
 msgid "Coefficient"
 msgstr "Coeficiente"
 
 #. module: product_pricelist_supplierinfo_coefficient
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_coefficient.product_pricelist_item_form_view_inherit
+msgid "Coefficient:"
+msgstr "Coeficiente:"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_coefficient.selection__product_pricelist_item__base_from_pricelist__standard_price
+msgid "Cost"
+msgstr "Coste"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_coefficient.product_pricelist_item_form_view_inherit
+msgid "Discount:"
+msgstr "Descuento:"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_coefficient.selection__product_pricelist_item__base_from_pricelist__pricelist
+msgid "Other Pricelist"
+msgstr "Otra lista de precios"
+
+#. module: product_pricelist_supplierinfo_coefficient
 #: model:ir.model,name:product_pricelist_supplierinfo_coefficient.model_product_pricelist_item
 msgid "Pricelist Rule"
 msgstr "Regla de la lista de precios"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_coefficient.selection__product_pricelist_item__base_from_pricelist__supplierinfo
+msgid "Prices based on supplier info"
+msgstr "Precios basados en la información del proveedor"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_coefficient.product_pricelist_item_form_view_inherit
+msgid "Rule other price list:"
+msgstr "Regla otra lista de precios:"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_coefficient.selection__product_pricelist_item__base_from_pricelist__list_price
+msgid "Sales Price"
+msgstr "Precio de venta"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_coefficient.field_product_pricelist_item__show_coefficient
+msgid "Show Coefficient"
+msgstr "Mostrar coeficiente"
+
+#. module: product_pricelist_supplierinfo_coefficient
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_coefficient.field_product_pricelist_item__price_discount_supplierinfo
+msgid "Supplier Discount"
+msgstr "Descuento del proveedor"

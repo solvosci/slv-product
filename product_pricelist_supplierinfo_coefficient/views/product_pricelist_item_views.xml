@@ -10,7 +10,14 @@
             </xpath>
             <xpath expr="//field[@name='base_pricelist_id']" position="after">
                 <field name="show_coefficient" invisible="1"/>
-                <field name="coefficient" string="Coefficient to supplierinfo" invisible="not show_coefficient" readonly="1"/>
+            </xpath>
+            <xpath expr="//group[@name='pricelist_rule_base']//div[contains(@class, 'alert alert-info')]" position="inside">
+                <div invisible="not show_coefficient or compute_price != 'formula' or base != 'pricelist'">
+                    <strong>Rule other price list: <field name="base_pricelist_id"/></strong><br/>
+                    <span>Base on: <field name="base_from_pricelist"/></span><br/>
+                    <span>Coefficient: <field name="coefficient"/></span><br/>
+                    <span>Discount: <field name="price_discount_supplierinfo"/></span><br/>
+                </div>
             </xpath>
         </field>
     </record>
