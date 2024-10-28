@@ -20,6 +20,13 @@ class ProductPricelistItem(models.Model):
         ],
     )
 
+    coefficient_from_pricelist = fields.Float(
+        string='Supplier Coefficient', compute="_compute_coeff_and_discount", store=True
+    )
+    price_discount_supplierinfo = fields.Float(
+        string='Supplier Discount', compute="_compute_coeff_and_discount", store=True
+    )
+
     def _compute_price(self, product, quantity, uom, date, currency):
         result = super()._compute_price(product, quantity, uom, date, currency=currency)
 
@@ -74,19 +81,51 @@ class ProductPricelistItem(models.Model):
             result = result
 
         return result
+    
+    @api.depends('base_pricelist_id.item_ids.coefficient', 'base_pricelist_id.item_ids.price_discount', 'applied_on', 'categ_id', 'product_tmpl_id', 'product_id')
+    def _compute_coeff_and_discount(self):
+        for record in self:
+            record.coefficient_from_pricelist = 0.0
+            record.price_discount_supplierinfo = 0.0
+            record.show_coefficient = False
 
+            if record.base == 'pricelist' and record.base_pricelist_id:
+                if record.applied_on == '2_product_category':
+                    pricelist_items = record.base_pricelist_id.item_ids.filtered(
+                        lambda x: x.categ_id == record.categ_id
+                    )
+                    if pricelist_items:
+                        record.coefficient_from_pricelist = pricelist_items[0].coefficient
+                        record.price_discount_supplierinfo = pricelist_items[0].price_discount
+                        record.show_coefficient = True
+                        record.base_from_pricelist = pricelist_items[0].base
 
-    @api.onchange('base_pricelist_id', 'applied_on', 'categ_id')
-    def onchange_base_pricelist_id(self):
-        self.coefficient = 0.0
-        self.price_discount = 0.0
-        self.show_coefficient = False 
+                elif record.applied_on == '1_product':
+                    pricelist_items = record.base_pricelist_id.item_ids.filtered(
+                        lambda x: x.product_tmpl_id == record.product_tmpl_id
+                    )
+                    if pricelist_items:
+                        record.coefficient_from_pricelist = pricelist_items[0].coefficient
+                        record.price_discount_supplierinfo = pricelist_items[0].price_discount
+                        record.show_coefficient = True
+                        record.base_from_pricelist = pricelist_items[0].base
+                        
+                elif record.applied_on == '0_product_variant':
+                    pricelist_items = record.base_pricelist_id.item_ids.filtered(
+                        lambda x: x.product_id == record.product_id
+                    )
+                    if pricelist_items:
+                        record.coefficient_from_pricelist = pricelist_items[0].coefficient
+                        record.price_discount_supplierinfo = pricelist_items[0].price_discount
+                        record.show_coefficient = True
+                        record.base_from_pricelist = pricelist_items[0].base
 
-        if self.base == 'pricelist' and self.base_pricelist_id:
-            if self.applied_on == '2_product_category':
-                pricelist_items = self.base_pricelist_id.item_ids.filtered(lambda x: x.categ_id == self.categ_id)
-                if pricelist_items:
-                    self.coefficient = pricelist_items[0].coefficient
-                    self.price_discount_supplierinfo = pricelist_items[0].price_discount
-                    self.show_coefficient = True
-                    self.base_from_pricelist = pricelist_items[0].base
+                elif record.applied_on == '3_global':
+                    pricelist_items = record.base_pricelist_id.item_ids
+                    global_item = pricelist_items.filtered(lambda x: x.applied_on == '3_global')
+                    if global_item:
+                        record.coefficient_from_pricelist = global_item[0].coefficient
+                        record.price_discount_supplierinfo = global_item[0].price_discount
+                        record.show_coefficient = True
+                        record.base_from_pricelist = global_item[0].base
+

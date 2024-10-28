@@ -25,7 +25,7 @@
                     
                     <div style="display: flex;">
                         <span style="margin-right: 8px;">Coefficient:</span>
-                        <field name="coefficient" readonly="1"/>
+                        <field name="coefficient_from_pricelist" readonly="1"/>
                     </div>
                     
                     <div style="display: flex;">
@@ -33,18 +33,6 @@
                         <field name="price_discount_supplierinfo" readonly="1"/>
                     </div>
                 </div>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="product_pricelist_item_tree_view_inherit" model="ir.ui.view">
-        <field name="name">product.pricelist.item.tree.inherit</field>
-        <field name="model">product.pricelist.item</field>
-        <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='price']" position="before">
-                <field name="base" column_invisible="1"/>
-                <field name="coefficient" invisible="base != 'supplierinfo'"/>
             </xpath>
         </field>
     </record>
