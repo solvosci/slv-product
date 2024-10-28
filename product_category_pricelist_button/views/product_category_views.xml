@@ -14,7 +14,7 @@
                         <span class="o_stat_value">
                             <field name="pricelist_count"/>
                         </span>
-                        <span class="o_stat_text">Pricelist Items</span>
+                        <span class="o_stat_text">Price rules</span>
                     </div>
                 </button>
             </xpath>
