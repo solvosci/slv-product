@@ -34,7 +34,8 @@ class ProductPricelistItem(models.Model):
             date = date.date()
 
         discount = 0.0
-        seller = None 
+        seller = None
+        extra = 0.0
 
         # Price according to the formula
         if self.compute_price == "formula" and self.base == "supplierinfo":
@@ -55,6 +56,7 @@ class ProductPricelistItem(models.Model):
                 # Get price
                 price_discounted = seller._get_supplierinfo_pricelist_price()
                 discount = seller.discount or 0.0
+                extra = seller.extra or 0.0
 
                 # Apply discount if it exists
                 if discount > 0:
@@ -62,9 +64,11 @@ class ProductPricelistItem(models.Model):
                 else:
                     price_discounted = price_without_discount  # If not discount, used to price without discount
 
+                price_discounted += extra
+
                 # If coefficient is > to 0, applu coefficient to price without discount
                 if self.coefficient > 0:
-                    result = price_discounted * self.coefficient
+                    result = (price_discounted * self.coefficient) + self.price_surcharge
                 else:
                     # If coeffient = 0, verify if there is discount
                     if discount == 0:
@@ -72,13 +76,13 @@ class ProductPricelistItem(models.Model):
                         result = 999999
                     else:
                         # If there is discount, return price without discount
-                        result = price_without_discount
+                        result = price_without_discount + extra
             else:
                 # If there isnt  seller, return price without discount
-                result = result
+                result += extra
         else:
             # If compute_price isnt "formula", return price without discount default
-            result = result
+            result += extra + self.price_surcharge
 
         return result
     
@@ -128,4 +132,3 @@ class ProductPricelistItem(models.Model):
                         record.price_discount_supplierinfo = global_item[0].price_discount
                         record.show_coefficient = True
                         record.base_from_pricelist = global_item[0].base
-

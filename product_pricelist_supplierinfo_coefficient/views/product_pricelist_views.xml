@@ -7,8 +7,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='price']" position="before">
                 <field name="coefficient"/>
-                <field name="coefficient_from_pricelist" optional="hide"/>
-                <field name="price_discount_supplierinfo" optional="hide"/>
             </xpath>
         </field>
     </record>

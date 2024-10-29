@@ -13,6 +13,7 @@
     "data": [
         "views/product_pricelist_item_views.xml",
         "views/product_pricelist_views.xml",
+        "views/product_supplierinfo_views.xml"
     ],
     "installable": True,
 }
