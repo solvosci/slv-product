@@ -77,12 +77,6 @@ class ProductPricelistItem(models.Model):
                     else:
                         # If there is discount, return price without discount
                         result = price_without_discount + extra
-            else:
-                # If there isnt  seller, return price without discount
-                result += extra
-        else:
-            # If compute_price isnt "formula", return price without discount default
-            result += extra + self.price_surcharge
 
         return result
     
