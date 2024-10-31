@@ -1,7 +1,7 @@
 # © 2024 Solvos Consultoría Informática (<http://www.solvos.es>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api
+from odoo import fields, models, api, tools
 
 from datetime import datetime
 
@@ -30,53 +30,50 @@ class ProductPricelistItem(models.Model):
     def _compute_price(self, product, quantity, uom, date, currency):
         result = super()._compute_price(product, quantity, uom, date, currency=currency)
 
-        if isinstance(date, datetime):
-            date = date.date()
-
-        discount = 0.0
-        seller = None
-        extra = 0.0
-
         # Price according to the formula
         if self.compute_price == "formula" and self.base == "supplierinfo":
 
-            # Price without discount
-            price_without_discount = product.sudo()._get_supplierinfo_pricelist_price(
-                self,
-                date=date or self.env.context.get("date"),
-                quantity=quantity,
-            )
-            seller = product.sudo()._select_seller(
-                partner_id=self.env.context.get("force_filter_supplier_id"),
+            if isinstance(date, datetime):
+                date = date.date()
+
+            if self.no_supplierinfo_min_quantity:
+                # No matter which minimum qty, we'll get every seller. We set a
+                # number absurdidly high
+                quantity = 1e9
+
+            seller = product.sudo().with_context(
+                override_min_qty=self.no_supplierinfo_min_quantity
+            )._select_seller(
+                partner_id=self.filter_supplier_id,
                 quantity=quantity,
                 date=date,
             )
 
             if seller:
-                # Get price
-                price_discounted = seller._get_supplierinfo_pricelist_price()
-                discount = seller.discount or 0.0
-                extra = seller.extra or 0.0
-
-                # Apply discount if it exists
-                if discount > 0:
-                    price_discounted *= (1 - (discount / 100))
-                else:
-                    price_discounted = price_without_discount  # If not discount, used to price without discount
-
-                price_discounted += extra
+                # Get seller data
+                seller_price = seller.price or 0.0
+                seller_discount = seller.discount or 0.0
+                seller_extra = seller.extra or 0.0
+                seller_price_discounted = seller.price_discounted or 0.0
 
                 # If coefficient is > to 0, applu coefficient to price without discount
                 if self.coefficient > 0:
-                    result = (price_discounted * self.coefficient) + self.price_surcharge
+                    price = ((seller_price_discounted + seller_extra) * self.coefficient) + self.price_surcharge
+                    if self.price_round:
+                        price = tools.float_round(price, precision_rounding=self.price_round)
+                    result = price
                 else:
                     # If coeffient = 0, verify if there is discount
-                    if discount == 0:
+                    if seller_discount == 0:
                         # If discount = 0, return 999999
                         result = 999999
                     else:
                         # If there is discount, return price without discount
-                        result = price_without_discount + extra
+                        price_discount = self.price_discount or 0.0 
+                        price = (seller_price + seller_extra) * (1 - (price_discount / 100)) + self.price_surcharge
+                        if self.price_round:
+                            price = tools.float_round(price, precision_rounding=self.price_round)
+                        result = price
 
         return result
     
