@@ -9,12 +9,13 @@
         """,
     "author": "Solvos",
     "license": "LGPL-3",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Product",
     "website": "https://github.com/solvosci/slv-product",
     "depends": ["product"],
     "data": [
         "views/product_template_view.xml",
+        "views/product_pricelist_item_views.xml",
     ],
     "installable": True,
 }
