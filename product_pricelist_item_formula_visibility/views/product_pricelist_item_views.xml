@@ -11,7 +11,7 @@
         </field>
     </record>
 
-    <record id="product_pricelist_item_tree_view_inherit" model="ir.ui.view">
+    <record id="product_pricelist_item_tree_view_from_product" model="ir.ui.view">
         <field name="name">product.pricelist.item.tree (in product_pricelist_item_formula_visibility)</field>
         <field name="model">product.pricelist.item</field>
         <field
