@@ -1,1 +1,1 @@
-Make the base and compute_price fields visible in the pricelist item tree view.
+Make the base and compute_price fields visible in the pricelist item tree views.
