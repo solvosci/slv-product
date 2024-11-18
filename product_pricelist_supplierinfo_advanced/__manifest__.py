@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Product Pricelist Supplierinfo Coefficient",
-    "summary": "Add a Coefficient field for calculating base selling prices  on supplier pricing and discounts.",
+    "name": "Product Pricelist Supplierinfo Advanced",
+    "summary": "Add a Coefficient field for calculating base selling prices on supplier pricing and discounts.",
     "author": "Solvos",
     "version": "17.0.1.0.0",
     "category": "Product",
