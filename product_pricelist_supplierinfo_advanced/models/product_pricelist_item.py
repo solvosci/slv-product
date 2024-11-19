@@ -1,7 +1,7 @@
 # © 2024 Solvos Consultoría Informática (<http://www.solvos.es>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api, tools
+from odoo import fields, models, api, tools, _
 
 from datetime import datetime
 
@@ -10,7 +10,6 @@ class ProductPricelistItem(models.Model):
 
     coefficient = fields.Float(string='Coefficient', default=0.0)
     show_coefficient = fields.Boolean("Show Coefficient", default=False)
-    price_discount_supplierinfo = fields.Float(string='Supplier Discount', default=0.0)
     base_from_pricelist = fields.Selection(
         selection=[
             ('list_price', 'Sales Price'),
@@ -23,7 +22,7 @@ class ProductPricelistItem(models.Model):
     coefficient_from_pricelist = fields.Float(
         string='Supplier Coefficient', compute="_compute_coeff_and_discount", store=True
     )
-    price_discount_supplierinfo = fields.Float(
+    price_from_pricelist = fields.Float(
         string='Supplier Discount', compute="_compute_coeff_and_discount", store=True
     )
 
@@ -61,6 +60,10 @@ class ProductPricelistItem(models.Model):
                     price = ((seller_price_discounted + seller_extra) * self.coefficient) + self.price_surcharge
                     if self.price_round:
                         price = tools.float_round(price, precision_rounding=self.price_round)
+                    if self.price_min_margin:
+                        price = max(price, price + self.price_min_margin)
+                    if self.price_max_margin:
+                        price = min(price, price + self.price_max_margin)
                     result = price
                 else:
                     # If coeffient = 0, verify if there is discount
@@ -73,6 +76,10 @@ class ProductPricelistItem(models.Model):
                         price = (seller_price + seller_extra) * (1 - (price_discount / 100)) + self.price_surcharge
                         if self.price_round:
                             price = tools.float_round(price, precision_rounding=self.price_round)
+                        if self.price_min_margin:
+                            price = max(price, price + self.price_min_margin)
+                        if self.price_max_margin:
+                            price = min(price, price + self.price_max_margin)
                         result = price
 
         return result
@@ -81,7 +88,7 @@ class ProductPricelistItem(models.Model):
     def _compute_coeff_and_discount(self):
         for record in self:
             record.coefficient_from_pricelist = 0.0
-            record.price_discount_supplierinfo = 0.0
+            record.price_from_pricelist = 0.0
             record.show_coefficient = False
 
             if record.base == 'pricelist' and record.base_pricelist_id:
@@ -91,7 +98,7 @@ class ProductPricelistItem(models.Model):
                     )
                     if pricelist_items:
                         record.coefficient_from_pricelist = pricelist_items[0].coefficient
-                        record.price_discount_supplierinfo = pricelist_items[0].price_discount
+                        record.price_from_pricelist = pricelist_items[0].price_discount
                         record.show_coefficient = True
                         record.base_from_pricelist = pricelist_items[0].base
 
@@ -101,7 +108,7 @@ class ProductPricelistItem(models.Model):
                     )
                     if pricelist_items:
                         record.coefficient_from_pricelist = pricelist_items[0].coefficient
-                        record.price_discount_supplierinfo = pricelist_items[0].price_discount
+                        record.price_from_pricelist = pricelist_items[0].price_discount
                         record.show_coefficient = True
                         record.base_from_pricelist = pricelist_items[0].base
                         
@@ -111,7 +118,7 @@ class ProductPricelistItem(models.Model):
                     )
                     if pricelist_items:
                         record.coefficient_from_pricelist = pricelist_items[0].coefficient
-                        record.price_discount_supplierinfo = pricelist_items[0].price_discount
+                        record.price_from_pricelist = pricelist_items[0].price_discount
                         record.show_coefficient = True
                         record.base_from_pricelist = pricelist_items[0].base
 
@@ -120,6 +127,54 @@ class ProductPricelistItem(models.Model):
                     global_item = pricelist_items.filtered(lambda x: x.applied_on == '3_global')
                     if global_item:
                         record.coefficient_from_pricelist = global_item[0].coefficient
-                        record.price_discount_supplierinfo = global_item[0].price_discount
+                        record.price_from_pricelist = global_item[0].price_discount
                         record.show_coefficient = True
                         record.base_from_pricelist = global_item[0].base
+
+    @api.depends_context('lang')
+    @api.depends('compute_price', 'price_discount', 'price_surcharge', 'base', 'price_round', 'coefficient')
+    def _compute_rule_tip(self):
+        super(ProductPricelistItem, self)._compute_rule_tip()
+
+        for item in self:
+            if item.compute_price == 'formula' and item.base == 'supplierinfo':
+                base_selection_vals = {elem[0]: elem[1] for elem in self._fields['base']._description_selection(self.env)}
+                discount_factor = (100 - item.price_discount) / 100
+                discounted_price = 100 * discount_factor
+                if item.price_round:
+                    discounted_price = tools.float_round(discounted_price, precision_rounding=item.price_round)
+                surcharge = tools.format_amount(item.env, item.price_surcharge, item.currency_id)
+
+                if item.coefficient > 0:
+                    # If coefficient > to 0
+                    item.rule_tip = _(
+                        "%(base)s with a %(coefficient_charge)s coefficient and %(surcharge)s extra fee\n"
+                        "Example: %(amount)s * %(coefficient_charge)s + %(price_surcharge)s → %(total_amount)s",
+                        base=base_selection_vals[item.base],
+                        surcharge=surcharge,
+                        amount=tools.format_amount(item.env, 100, item.currency_id),
+                        coefficient_charge=item.coefficient,
+                        price_surcharge=surcharge,
+                        total_amount=tools.format_amount(
+                            item.env,
+                            (100 * item.coefficient) + item.price_surcharge,
+                            item.currency_id
+                        )
+                    )
+                else:
+                    # No coefficient
+                    item.rule_tip = _(
+                        "%(base)s with a %(discount)s %% discount and %(surcharge)s extra fee\n"
+                        "Example: %(amount)s * %(discount_charge)s + %(price_surcharge)s → %(total_amount)s",
+                        base=base_selection_vals[item.base],
+                        discount=item.price_discount,
+                        surcharge=surcharge,
+                        amount=tools.format_amount(item.env, 100, item.currency_id),
+                        discount_charge=discount_factor,
+                        price_surcharge=surcharge,
+                        total_amount=tools.format_amount(
+                            item.env,
+                            discounted_price + item.price_surcharge,
+                            item.currency_id
+                        )
+                    )
