@@ -1,0 +1,22 @@
+<odoo>
+    <record id="product_attribute_view_form" model="ir.ui.view">
+        <field name="name">product.attribute.form (in product_description_attribute)</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="include_variant_name" />
+            </xpath>
+        </field>
+    </record>
+    <record id="attribute_tree_view" model="ir.ui.view">
+        <field name="name">product.attribute.tree (in product_description_attribute)</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.attribute_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="include_variant_name" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
