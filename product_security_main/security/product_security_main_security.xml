@@ -86,12 +86,6 @@
 
         <!-- Disable product creation: Accounting -->
         <record
-            id="account.access_product_template_account_manager"
-            model="ir.model.access"
-        >
-            <field eval="0" name="perm_create"/>
-        </record>
-        <record
             id="account.access_product_product_account_manager"
             model="ir.model.access"
         >
