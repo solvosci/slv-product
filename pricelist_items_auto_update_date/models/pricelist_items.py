@@ -21,7 +21,7 @@ class ProductPricelistItem(models.Model):
         items = []
         for values in vals_list:
             items.append({'product_tmpl_id': values['product_tmpl_id'],
-                          'pricelist_id': values['pricelist_id']})
+                        'pricelist_id': values['pricelist_id']})
         for element in items:
             error = False
             for element2 in items:
@@ -37,11 +37,11 @@ class ProductPricelistItem(models.Model):
                 pricelist_item_ids = self.search([('pricelist_id', '=', values['pricelist_id']), ('product_tmpl_id', '=', values['product_tmpl_id'])], order='date_start asc')
                 date_min = pricelist_item_ids and pricelist_item_ids[0].date_start
                 for item in pricelist_item_ids:
-                    date_start = datetime.strptime(values['date_start'], '%Y-%m-%d').date()
+                    date_start = values['date_start']
 
                     # New date is manor to the smallest date
                     if date_min > date_start:
-                        values['date_end'] = date_min - timedelta(days=1)
+                        values['date_end'] = date_min - timedelta(seconds=1)
                         break
                     elif item.date_start == date_start:
                         item.fixed_price = values['fixed_price']
@@ -49,16 +49,16 @@ class ProductPricelistItem(models.Model):
                         break
                     # New date is greater than the date_start and date_end is False
                     elif item.date_start < date_start and item.date_end is False:
-                        item.date_end = date_start - timedelta(days=1)
+                        item.date_end = date_start - timedelta(seconds=1)
                         break
                     # New date is less than the date_start and date_end is False
                     elif item.date_start > date_start and item.date_end is False:
-                        values['date_end'] = item.date_end - timedelta(days=1)
+                        values['date_end'] = item.date_end - timedelta(seconds=1)
                         break
                     # New date is less than or equal to the date_end
                     elif item.date_end and item.date_end >= date_start:
                         values['date_end'] = item.date_end
-                        item.date_end = date_start - timedelta(days=1)
+                        item.date_end = date_start - timedelta(seconds=1)
                         break
 
         return super(ProductPricelistItem, self).create(vals_list)
