@@ -10,7 +10,6 @@ class ProductCategory(models.Model):
     root_id = fields.Many2one(
         comodel_name="product.category",
         compute="_compute_root_id",
-        readonly=True,
         store=True,
         string="Root Category",
         help="Indicates the root category for this category,"
