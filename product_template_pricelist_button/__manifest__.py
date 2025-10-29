@@ -9,7 +9,7 @@
         """,
     "author": "Solvos",
     "license": "LGPL-3",
-    "version": "17.0.1.1.0",
+    "version": "17.0.1.2.0",
     "category": "Product",
     "website": "https://github.com/solvosci/slv-product",
     "depends": ["product"],
