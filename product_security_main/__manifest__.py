@@ -8,13 +8,14 @@
     """,
     "author": "Solvos",
     "license": "LGPL-3",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "category": "Product",
     "website": "https://github.com/solvosci/slv-product",
-    "depends": ["stock", "purchase", "sale"],
+    "depends": ["stock", "purchase", "sale", "mrp"],
     "data": [
         "security/product_security_main_security.xml",
         "security/ir.model.access.csv",
     ],
     'installable': True,
+    "uninstall_hook": "uninstall_hook",
 }
