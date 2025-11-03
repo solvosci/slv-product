@@ -40,7 +40,8 @@ class ProductPricelistItem(models.Model):
                 # number absurdidly high
                 quantity = 1e9
 
-            seller = product.sudo().with_context(
+            product_variant = product.is_product_variant and product or product.product_variant_id
+            seller = product_variant.sudo().with_context(
                 override_min_qty=self.no_supplierinfo_min_quantity
             )._select_seller(
                 partner_id=self.filter_supplier_id,
