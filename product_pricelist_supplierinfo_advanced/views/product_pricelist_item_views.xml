@@ -1,0 +1,62 @@
+<odoo>
+
+    <record id="product_pricelist_item_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.pricelist.item.form.inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='base']" position="after">
+                <field name="coefficient" invisible="base != 'supplierinfo'"/>
+            </xpath>
+            <xpath expr="//field[@name='base_pricelist_id']" position="after">
+                <field name="show_coefficient" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[@name='pricelist_rule_base']//div[contains(@class, 'alert alert-info')]" position="inside">
+                <div invisible="not show_coefficient or compute_price != 'formula' or base != 'pricelist'" style="width: 100%;">
+                    <div style="display: flex; margin-top: 10px;">
+                        <span style="margin-right: 8px;">Rule other price list:</span>
+                        <field name="base_pricelist_id" readonly="1"/>
+                    </div>
+                    
+                    <div style="display: flex;">
+                        <span style="margin-right: 8px;">Base on:</span>
+                        <field name="base_from_pricelist" readonly="1"/>
+                    </div>
+                    
+                    <div style="display: flex;">
+                        <span style="margin-right: 8px;">Coefficient:</span>
+                        <field name="coefficient_from_pricelist" readonly="1"/>
+                    </div>
+                    
+                    <div style="display: flex;">
+                        <span style="margin-right: 8px;">Discount:</span>
+                        <field name="price_from_pricelist" readonly="1"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_pricelist_item_tree_view_from_product" model="ir.ui.view">
+        <field name="name">product.pricelist.item.tree.inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_tree_view_from_product"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='min_quantity']" position="before">
+                <field name="coefficient"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_pricelist_item_tree_view_from_category_product" model="ir.ui.view">
+        <field name="name">product.pricelist.item.tree.inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='min_quantity']" position="before">
+                <field name="coefficient"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

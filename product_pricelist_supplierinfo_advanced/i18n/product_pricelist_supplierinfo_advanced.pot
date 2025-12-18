@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_pricelist_supplierinfo_advanced
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-18 07:42+0000\n"
+"PO-Revision-Date: 2024-11-18 07:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_advanced.product_pricelist_item_form_view_inherit
+msgid "<span style=\"margin-right: 8px;\">Base on:</span>"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_advanced.product_pricelist_item_form_view_inherit
+msgid "<span style=\"margin-right: 8px;\">Coefficient:</span>"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_advanced.product_pricelist_item_form_view_inherit
+msgid "<span style=\"margin-right: 8px;\">Discount:</span>"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model_terms:ir.ui.view,arch_db:product_pricelist_supplierinfo_advanced.product_pricelist_item_form_view_inherit
+msgid "<span style=\"margin-right: 8px;\">Rule other price list:</span>"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_advanced.field_product_pricelist_item__base_from_pricelist
+msgid "Base From Pricelist"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_advanced.field_product_pricelist_item__coefficient
+msgid "Coefficient"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_advanced.selection__product_pricelist_item__base_from_pricelist__standard_price
+msgid "Cost"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_advanced.field_product_supplierinfo__extra
+msgid "Extra"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_advanced.selection__product_pricelist_item__base_from_pricelist__pricelist
+msgid "Other Pricelist"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model,name:product_pricelist_supplierinfo_advanced.model_product_pricelist_item
+msgid "Pricelist Rule"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_advanced.selection__product_pricelist_item__base_from_pricelist__supplierinfo
+msgid "Prices based on supplier info"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields.selection,name:product_pricelist_supplierinfo_advanced.selection__product_pricelist_item__base_from_pricelist__list_price
+msgid "Sales Price"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_advanced.field_product_pricelist_item__show_coefficient
+msgid "Show Coefficient"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_advanced.field_product_pricelist_item__coefficient_from_pricelist
+msgid "Supplier Coefficient"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model.fields,field_description:product_pricelist_supplierinfo_advanced.field_product_pricelist_item__price_discount_supplierinfo
+msgid "Supplier Discount"
+msgstr ""
+
+#. module: product_pricelist_supplierinfo_advanced
+#: model:ir.model,name:product_pricelist_supplierinfo_advanced.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr ""

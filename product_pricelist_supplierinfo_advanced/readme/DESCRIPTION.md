@@ -1,0 +1,1 @@
+Add a Coefficient field for calculating base selling prices  on supplier pricing and discounts.
