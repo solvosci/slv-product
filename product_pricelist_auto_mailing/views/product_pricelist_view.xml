@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
     <record id="product_pricelist_view" model="ir.ui.view">
@@ -7,7 +6,7 @@
         <field name="inherit_id" ref="product.product_pricelist_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
-                <field name="mailable_user_ids" widget="many2many_tags" groups="base.group_no_one"/>
+                <field name="mailable_user_ids" widget="many2many_tags" readonly="1" groups="base.group_no_one"/>
             </xpath>
         </field>
     </record>

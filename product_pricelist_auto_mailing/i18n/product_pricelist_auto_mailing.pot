@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 07:52+0000\n"
-"PO-Revision-Date: 2024-06-27 07:52+0000\n"
+"POT-Creation-Date: 2026-01-22 08:27+0000\n"
+"PO-Revision-Date: 2026-01-22 08:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,13 +18,13 @@ msgstr ""
 #. module: product_pricelist_auto_mailing
 #: model:mail.template,body_html:product_pricelist_auto_mailing.mail_template_data_pricelist_notification
 msgid ""
-"<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"                        % for body in ctx.get('body', []):\n"
-"                            ${body}<br/>\n"
-"                        % endfor\n"
-"                        <br/>\n"
-"                        Please review. <br/>\n"
+"<div>\n"
+"                    <p style=\"font-size: 13px;\">\n"
+"                        <t t-foreach=\"ctx.get('body', [])\" t-as=\"line\">\n"
+"                            <t t-esc=\"line\"></t><br>\n"
+"                        </t>\n"
+"                        <br>\n"
+"                        Please review.<br>\n"
 "                        Thanks.\n"
 "                    </p>\n"
 "                </div>\n"
@@ -32,17 +32,33 @@ msgid ""
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
-#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
-msgid ""
-"<span>Users to take into account when changing the content of a "
-"pricelist</span>"
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_needaction
+msgid "Action Needed"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
-#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
-msgid ""
-"<span>Users who will receive notice of pricelist changed by users so "
-"marked</span>"
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
@@ -56,13 +72,113 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
 #: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__mailable_user_ids
 msgid "Mailable User"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
 #: model:ir.model,name:product_pricelist_auto_mailing.model_product_pricelist
 msgid "Pricelist"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:mail.template,name:product_pricelist_auto_mailing.mail_template_data_pricelist_notification
+msgid "Pricelist Notification"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
@@ -81,16 +197,39 @@ msgid "Pricelist notifications"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
 #: model:ir.actions.server,name:product_pricelist_auto_mailing.cron_ir_actions_server
-#: model:ir.cron,cron_name:product_pricelist_auto_mailing.cron
-#: model:ir.cron,name:product_pricelist_auto_mailing.cron
 msgid "Send notifications of changed or created pricelist items"
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#. odoo-python
 #: code:addons/product_pricelist_auto_mailing/models/product_pricelist.py:0
 #, python-format
 msgid "The pricelist %s, has changed for users: %s"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__activity_exception_decoration
+msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: product_pricelist_auto_mailing
@@ -103,4 +242,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_res_company__user_notifying_price_changes_ids
 #: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_res_config_settings__user_notifying_price_changes_ids
 msgid "User Notifying Price Changes"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
+msgid "Users to take into account when changing the content of a pricelist."
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model_terms:ir.ui.view,arch_db:product_pricelist_auto_mailing.res_config_settings_view_form
+msgid "Users who will receive notice of pricelist changed by users so marked."
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,field_description:product_pricelist_auto_mailing.field_product_pricelist__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: product_pricelist_auto_mailing
+#: model:ir.model.fields,help:product_pricelist_auto_mailing.field_product_pricelist__website_message_ids
+msgid "Website communication history"
 msgstr ""
