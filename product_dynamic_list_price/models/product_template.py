@@ -15,20 +15,36 @@ class ProductTemplate(models.Model):
     )
 
     def _recalculate_list_price_2(self):
+        # pricelist = self.env.company.reference_pricelist_id
+        # for record in self:
+        #     if not pricelist:
+        #         record.list_price_2 = record.standard_price
+        #         continue
+        #     price = pricelist._price_get(
+        #         product=record,
+        #         quantity=1.0,
+        #         date=fields.Date.today(),
+        #     )[pricelist.id]
+        #     if price:
+        #         record.list_price_2 = price
+        #     else:
+        #         record.list_price_2 = record.standard_price
+
+        # Alternative code, presumabily faster (mono pricelist, multi product): _compute_price_rule
         pricelist = self.env.company.reference_pricelist_id
-        for record in self:
-            if not pricelist:
-                record.list_price_2 = record.standard_price
-                continue
-            price = pricelist._price_get(
-                product=record,
-                quantity=1.0,
-                date=fields.Date.today(),
-            )[pricelist.id]
-            if price:
-                record.list_price_2 = price
-            else:
-                record.list_price_2 = record.standard_price
+        if pricelist:
+            results = pricelist._compute_price_rule(
+                self,
+                1.0,
+                date=fields.Date.today()
+            )
+            for product in self:
+                product.list_price_2 = results[product.id][0]
+        else:
+            for product in self:
+                product.list_price_2 = product.standard_price
+
+
 
     @api.model
     def recalculate_list_price_2(self):
