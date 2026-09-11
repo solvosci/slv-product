@@ -12,5 +12,5 @@ class ResConfigSettings(models.TransientModel):
         string="Reference Pricelist for Dynamic Sale Price",
         related="company_id.reference_pricelist_id",
         readonly=False,
-        required=True,
+        # required=True,
     )
