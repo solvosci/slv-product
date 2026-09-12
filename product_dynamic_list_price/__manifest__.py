@@ -13,7 +13,9 @@
     "depends": ["product", "point_of_sale"],
     "data": [
         "data/product_product.xml",
+        "views/product_category_views.xml",
         "views/product_template_views.xml",
+        "views/product_product_views.xml",
         "views/res_config_settings_views.xml",
     ],
     "assets": {
