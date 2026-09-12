@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_dynamic_list_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-13 08:06+0000\n"
+"PO-Revision-Date: 2026-01-13 08:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_dynamic_list_price
+#: model:ir.model,name:product_dynamic_list_price.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: product_dynamic_list_price
+#: model:ir.model,name:product_dynamic_list_price.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: product_dynamic_list_price
+#: model:ir.model.fields,help:product_dynamic_list_price.field_product_product__list_price
+#: model:ir.model.fields,help:product_dynamic_list_price.field_product_template__list_price
+msgid "Price at which the product is sold to customers."
+msgstr ""
+
+#. module: product_dynamic_list_price
+#: model:ir.model,name:product_dynamic_list_price.model_product_template
+#: model_terms:ir.ui.view,arch_db:product_dynamic_list_price.res_config_settings_view_form_product_pricing
+msgid "Product"
+msgstr ""
+
+#. module: product_dynamic_list_price
+#: model:ir.model.fields,field_description:product_dynamic_list_price.field_res_company__reference_pricelist_id
+#: model:ir.model.fields,field_description:product_dynamic_list_price.field_res_config_settings__reference_pricelist_id
+#: model_terms:ir.ui.view,arch_db:product_dynamic_list_price.res_config_settings_view_form_product_pricing
+msgid "Reference Pricelist for Dynamic Sale Price"
+msgstr ""
+
+#. module: product_dynamic_list_price
+#: model:ir.model.fields,field_description:product_dynamic_list_price.field_product_product__list_price
+#: model:ir.model.fields,field_description:product_dynamic_list_price.field_product_template__list_price
+msgid "Sales Price"
+msgstr ""
