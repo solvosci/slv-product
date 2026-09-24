@@ -29,7 +29,7 @@ class ProductTemplate(models.Model):
             if price:
                 record.list_price_2 = price
             else:
-                record.list_price_2 = record.standard_price
+                record.list_price_2 = record.list_price
 
         # Alternative code, presumabily faster (mono pricelist, multi product): _compute_price_rule
         # unfortunately was slower than the other one!
