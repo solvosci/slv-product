@@ -15,6 +15,17 @@ class ProductTemplate(models.Model):
             [ ("categ_id", "parent_of", self.categ_id.id)]
         ])
         action["domain"] = domain_aux
+        # Default tree view has editable flag, we prefer form here for new & edit
+        action["views"] = [
+            (
+                self.env.ref("product_template_pricelist_button.product_pricelist_item_tree_view_from_product_no_edit").id,
+                "tree",
+            ),
+            (
+                self.env.ref("product.product_pricelist_item_form_view").id,
+                "form",
+            ),
+        ]
         return action
 
     def _compute_item_count(self):
